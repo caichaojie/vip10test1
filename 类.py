@@ -61,9 +61,9 @@ class Furniture():
 #定义一个房子类
 class House():
     #定义房子的属性
-    def __init__(self,residual_area,floor_area):
-        self.residual_area=residual_area
-        self.floor_area=floor_area
+    def __init__(self,floor_area):
+        self.floor_area = floor_area
+        self.residual_area=floor_area
         self.lst1=[]
     #房子的说明
     def __str__(self):
@@ -72,12 +72,16 @@ class House():
     def addfurniture(self,item):
         if self.residual_area >= item.size:
             self.lst1.append(item.name)
-
+            #放了家具后要减少房间剩余面积
+            self.residual_area-=item.size
+            # return self.residual_area
+            print("房间内已有家具%s,剩余面积%s"%(self.lst1,self.residual_area))
         else:
             print("剩余面积不足")
 
 #创建一个房子的对象
-house1=House(80,100)
+house1=House(100)
+print(house1)
 #创建家具的对象
 bad=Furniture('床',4)
 #调用方法
